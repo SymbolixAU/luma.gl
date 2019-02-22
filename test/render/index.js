@@ -29,8 +29,14 @@ test('RenderTest', t => {
 });
 
 test('PerformanceTest', t => {
+  if (window.browserTestDriver_isHeadless) {
+    t.comment('Performance test is not available in headless mode');
+    t.end();
+    return;
+  }
+
   // tape's default timeout is 500ms
-  t.timeoutAfter(perfTestCaseCount * 2000);
+  t.timeoutAfter(perfTestCaseCount * 4000);
 
   const pixelRatio = window.devicePixelRatio || 1;
 
